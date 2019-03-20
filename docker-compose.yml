@@ -1,21 +1,9 @@
 nginx:
-    build: ./nginx/
+    image: nginx-image
     ports:
         - 80:80
     links:
-        - php
-    volumes_from:
-        - app
+        - backend
 
-php:
-    image: php:7.0-fpm
-    expose:
-        - 9000
-    volumes_from:
-        - app
-
-app:
-    image: php:7.0-fpm
-    volumes:
-        - ./www/html:/var/www/html
-    command: "true"
+backend:
+    image: backend-image
