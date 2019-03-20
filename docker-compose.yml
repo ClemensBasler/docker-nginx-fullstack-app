@@ -4,6 +4,10 @@ nginx:
         - 80:80
     links:
         - backend
+        - frontend
 
 backend:
     image: backend-image
+
+frontend:
+    image: frontend-image
