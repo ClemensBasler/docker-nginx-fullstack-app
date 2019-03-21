@@ -1,13 +1,31 @@
-nginx:
-    image: nginx-image
-    ports:
-        - 80:80
-    links:
-        - backend
-        - frontend
+version: "3"
 
-backend:
-    image: backend-image
+networks:
+  frontend:
+  backend:
 
-frontend:
-    image: frontend-image
+services:
+
+  nginx:
+      build: ./nginx/
+      image: nginx-image
+      ports:
+          - 80:80
+      links:
+          - backend
+          - frontend
+      networks:
+          - frontend
+          - backend
+
+  backend:
+      build: ./backend/
+      image: backend-image
+      networks:
+          - backend
+
+  frontend:
+      build: ./frontend/    
+      image: frontend-image
+      networks:
+          - frontend
