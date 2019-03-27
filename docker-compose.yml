@@ -8,7 +8,7 @@ services:
 
   nginx:
       build: ./nginx/
-      image: nginx-image
+      image: registry.gitlab.com/basler/docker-nginx-fullstack-app-registry/nginx
       ports:
           - 80:80
       links:
@@ -20,12 +20,12 @@ services:
 
   backend:
       build: ./backend/
-      image: backend-image
+      image: registry.gitlab.com/basler/docker-nginx-fullstack-app-registry/backend
       networks:
           - backend
 
   frontend:
-      build: ./frontend/    
-      image: frontend-image
+      build: ./frontend/
+      image: registry.gitlab.com/basler/docker-nginx-fullstack-app-registry/frontend
       networks:
           - frontend
