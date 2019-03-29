@@ -1,6 +1,48 @@
 <?php
+require 'vendor/autoload.php';
+// Create and configure Slim app
+$config = ['settings' => [
+    'addContentLengthHeader' => false,
+]];
+$app = new \Slim\App($config);
 
-  $var = 1;
+// Define app routes
 
-  var_dump($var);
- ?>
+// $newResponse = withJson($data);
+
+$app->get('/', function ($request, $response, $args) {
+  // $response2 = $response->withHeader('Content-type', 'application/json');
+  // $data = array('name' => 'Bob', 'age' => 40);
+
+  $data = array('name' => 'Bob', 'age' => 20);
+  $response->withHeader('Content-Type', 'application/json');
+  $response->write(json_encode($data));
+  return $response;
+});
+
+
+$app->get('/json', function ($request, $response, $args) {
+  // $response2 = $response->withHeader('Content-type', 'application/json');
+  // $data = array('name' => 'Bob', 'age' => 40);
+
+  $data = array('name' => 'Lisa', 'age' => 18);
+  $response->withHeader('Content-Type', 'application/json');
+  $response->write(json_encode($data));
+  return $response;
+});
+
+
+$app->get('/time', function ($request, $response, $args) {
+
+  $data = array('name' => 'Bobs Time', 'time' => date("H:i:s"));
+  $response->withHeader('Content-Type', 'application/json');
+  $response->write(json_encode($data));
+  return $response;
+});
+
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    return $response->write("Hello " . $args['name']);
+});
+
+// Run app
+$app->run();

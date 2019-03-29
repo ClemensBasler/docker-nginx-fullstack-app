@@ -1,8 +1,12 @@
-FROM php:7.0-fpm
-FROM composer
-
-# WORKDIR /var/www/html
+FROM php:7.2-fpm-alpine
 
 COPY ./www/html /var/www/html
 
-# RUN composer install
+#install git
+RUN apk add --no-cache git
+
+#install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# composer install
+RUN composer install
